@@ -1,11 +1,120 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>API Full Stack Project</title>
-  </head>
-  <body>
-    <!-- You code goes here-->
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoQuiz — World Countries Challenge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-label">🌍 Test your knowledge</div>
+    <h1>GeoQuiz</h1>
+    <div class="header-sub">World Countries Challenge</div>
+  </div>
+
+  <!-- ENTRY SCREEN -->
+  <div id="screen-entry" class="screen active">
+    <div class="card entry-card">
+      <div class="entry-icon">🗺️</div>
+      <h2>Ready to explore?</h2>
+      <p>You'll be shown a country's language, currency & capital clues.<br>Name the country — keep your streak alive!</p>
+      <div class="input-group">
+        <label>Your Name</label>
+        <input type="text" id="player-name" placeholder="Enter your name..." maxlength="24" autocomplete="off">
+      </div>
+      <button class="btn btn-primary" onclick="startGame()">▶ &nbsp;Start Game</button>
+    </div>
+  </div>
+
+  <!-- LOADING SCREEN -->
+  <div id="screen-loading" class="screen">
+    <div class="card">
+      <div class="loading-wrap">
+        <div class="spinner"></div>
+        <p>Loading countries data...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="screen-game" class="screen">
+    <div class="game-header">
+      <div class="game-player">Player: <span id="display-name">—</span></div>
+      <div class="stats-row">
+        <div class="stat-pill score">🏆 <span class="val" id="stat-score">0</span></div>
+        <div class="stat-pill streak">🔥 <span class="val" id="stat-streak">0</span></div>
+        <div class="stat-pill progress">🌍 <span class="val" id="stat-progress">0/0</span></div>
+      </div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+
+    <div class="card question-card">
+      <div class="country-num" id="country-num">Country 1 of ?</div>
+      <div class="region-tag" id="region-tag">🌐 Region</div>
+      <div class="country-facts">
+        <div class="fact-item">
+          <div class="fact-label">💬 Language</div>
+          <div class="fact-value" id="fact-lang">—</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">💰 Currency</div>
+          <div class="fact-value" id="fact-curr">—</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">🏛️ Capital</div>
+          <div class="fact-value" id="fact-cap">—</div>
+        </div>
+      </div>
+      <div class="guess-section">
+        <label>Name the country</label>
+        <div class="input-row">
+          <input type="text" id="guess-input" placeholder="Type country name..." autocomplete="off">
+          <button class="btn btn-submit" onclick="submitGuess()">→ Submit</button>
+        </div>
+      </div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+  </div>
+
+  <!-- GAME OVER SCREEN -->
+  <div id="screen-gameover" class="screen">
+    <div class="card gameover-card">
+      <div class="gameover-icon" id="gameover-icon">💀</div>
+      <h2 id="gameover-title">Game Over</h2>
+      <p id="gameover-msg">Better luck next time!</p>
+      <div class="final-score-row">
+        <div class="final-stat">
+          <span class="big" id="final-score">0</span>
+          <span class="lbl">Score</span>
+        </div>
+        <div class="final-stat">
+          <span class="big" id="final-countries">0</span>
+          <span class="lbl">Countries</span>
+        </div>
+        <div class="final-stat">
+          <span class="big" id="final-streak">0</span>
+          <span class="lbl">Best Streak</span>
+        </div>
+      </div>
+      <div class="lb-section">
+        <div class="lb-title">🏆 Top 10 Leaderboard</div>
+        <ul class="lb-list" id="leaderboard"></ul>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="playAgain()">↺ &nbsp;Play Again</button>
+        <button class="btn btn-secondary" onclick="goHome()">⌂ &nbsp;Home</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+<script src="script.js"></script>
+</body>
 </html>
